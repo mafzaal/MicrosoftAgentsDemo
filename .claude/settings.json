@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//home/mafzaal/.nuget/packages/microsoft.agents.ai/1.3.0/lib/net10.0/**)",
+      "Read(//home/mafzaal/.nuget/packages/microsoft.agents.ai/**)",
+      "Bash(dotnet build *)"
+    ]
+  }
+}

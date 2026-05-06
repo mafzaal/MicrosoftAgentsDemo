@@ -1,0 +1,34 @@
+## .NET build output
+bin/
+obj/
+
+## NuGet packages (restored via dotnet restore)
+*.nupkg
+*.snupkg
+
+## User-specific Visual Studio / Rider files
+*.user
+*.suo
+.vs/
+.idea/
+.vscode/
+
+## SQLite database (runtime data, not source)
+*.db
+*.db-shm
+*.db-wal
+
+## Secrets and local environment overrides — never commit these
+.env
+appsettings.Development.json
+appsettings.Local.json
+
+## .NET user secrets
+secrets.json
+
+## macOS
+.DS_Store
+
+## Windows
+Thumbs.db
+expenses.db
