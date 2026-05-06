@@ -65,7 +65,8 @@ async function sendMessage(text) {
 
   const typingEl = showTyping();
   let bubble;
-  let started = false;
+  let started  = false;
+  let rawText  = '';   // accumulated markdown source
 
   try {
     const res = await fetch('/api/chat/stream', {
@@ -105,9 +106,11 @@ async function sendMessage(text) {
           if (!started) {
             typingEl.remove();
             bubble = addMessage('assistant');
+            bubble.classList.add('prose');
             started = true;
           }
-          bubble.textContent += parsed.text;
+          rawText += parsed.text;
+          renderMarkdown(bubble, rawText);
           scrollToBottom();
         }
       }
@@ -162,7 +165,15 @@ input.addEventListener('input', () => {
   input.style.height = Math.min(input.scrollHeight, 130) + 'px';
 });
 
-// ── Mode: standard expense-assistant vs. client-tools demo ───────────────────
+// ── Markdown rendering ────────────────────────────────────────────────────────
+// Configure marked: use GitHub-flavoured markdown, sanitise with DOMPurify.
+marked.use({ gfm: true, breaks: true });
+
+function renderMarkdown(bubble, rawText) {
+  bubble.innerHTML = DOMPurify.sanitize(marked.parse(rawText));
+}
+
+
 let mode       = 'standard';   // 'standard' | 'clienttools'
 let ctThreadId = null;
 
@@ -241,6 +252,7 @@ async function runClientToolsStream(body) {
   const typingEl = showTyping();
   let bubble  = null;
   let started = false;
+  let rawText = '';   // accumulated markdown source
 
   try {
     let currentBody = body;
@@ -279,8 +291,9 @@ async function runClientToolsStream(body) {
           if (parsed.type === 'thread') {
             ctThreadId = parsed.threadId;
           } else if (parsed.type === 'chunk' && parsed.text) {
-            if (!started) { typingEl.remove(); bubble = addMessage('assistant'); started = true; }
-            bubble.textContent += parsed.text;
+            if (!started) { typingEl.remove(); bubble = addMessage('assistant'); bubble.classList.add('prose'); started = true; }
+            rawText += parsed.text;
+            renderMarkdown(bubble, rawText);
             scrollToBottom();
           } else if (parsed.type === 'status') {
             const dotsEl = typingEl.querySelector('.bubble');
@@ -296,6 +309,7 @@ async function runClientToolsStream(body) {
       if (!started && pendingToolCalls.length > 0) {
         typingEl.remove();
         bubble  = addMessage('assistant');
+        bubble.classList.add('prose');
         started = true;
       }
 

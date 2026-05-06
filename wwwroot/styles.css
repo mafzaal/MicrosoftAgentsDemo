@@ -273,7 +273,67 @@ body {
   border-color: #7c3aed;
 }
 
-/* Tool badges inside assistant bubbles */
+
+/* Markdown prose rendering inside assistant bubbles */
+.bubble.prose { white-space: normal; }
+
+.bubble.prose p          { margin: 0 0 .6em; }
+.bubble.prose p:last-child { margin-bottom: 0; }
+.bubble.prose ul,
+.bubble.prose ol         { margin: .4em 0 .6em 1.25em; }
+.bubble.prose li         { margin-bottom: .2em; }
+.bubble.prose h1,.bubble.prose h2,.bubble.prose h3 {
+  font-weight: 600;
+  margin: .75em 0 .3em;
+  line-height: 1.3;
+}
+.bubble.prose h1 { font-size: 1.1em; }
+.bubble.prose h2 { font-size: 1em; }
+.bubble.prose h3 { font-size: .95em; }
+.bubble.prose strong { font-weight: 600; }
+.bubble.prose em     { font-style: italic; }
+.bubble.prose code {
+  font-family: ui-monospace, "Cascadia Code", "Fira Code", monospace;
+  font-size: .875em;
+  background: rgba(0,0,0,.06);
+  padding: .1em .35em;
+  border-radius: .25rem;
+}
+.bubble.prose pre {
+  background: #1e1e2e;
+  color: #cdd6f4;
+  border-radius: .5rem;
+  padding: .875rem 1rem;
+  overflow-x: auto;
+  margin: .5em 0;
+}
+.bubble.prose pre code {
+  background: none;
+  padding: 0;
+  font-size: .85em;
+  color: inherit;
+}
+.bubble.prose blockquote {
+  border-left: 3px solid var(--border);
+  margin: .5em 0;
+  padding: .25em .75em;
+  color: var(--muted);
+}
+.bubble.prose table {
+  border-collapse: collapse;
+  margin: .5em 0;
+  font-size: .9em;
+  width: 100%;
+}
+.bubble.prose th,
+.bubble.prose td {
+  border: 1px solid var(--border);
+  padding: .35em .65em;
+  text-align: left;
+}
+.bubble.prose th { background: var(--bg); font-weight: 600; }
+.bubble.prose hr { border: none; border-top: 1px solid var(--border); margin: .75em 0; }
+.bubble.prose a  { color: var(--primary); text-decoration: underline; }
 .tool-badge {
   display: inline-block;
   font-size: .75rem;
