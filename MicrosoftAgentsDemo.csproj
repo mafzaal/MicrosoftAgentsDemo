@@ -18,6 +18,8 @@
     <PackageReference Include="Microsoft.Agents.AI.Foundry" Version="1.4.0" />
     <PackageReference Include="Microsoft.Agents.AI.Hosting.OpenAI" Version="1.3.0-alpha.260423.1" />
     <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.7" />
+    <!-- Pin to patched version to resolve NU1902 vulnerability in transitive 1.15.0 -->
+    <PackageReference Include="OpenTelemetry.Api" Version="1.15.3" />
   </ItemGroup>
 
 </Project>
